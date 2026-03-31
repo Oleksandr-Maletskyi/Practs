@@ -10,15 +10,19 @@ public class Assignment1 {
                 new Book("Java Concurrency", "Brian Goetz", 2006, List.of("concurrency", "java"))
         );
 
-        System.out.println("--- Результат ---");
 
         List<String> result = books.stream()
+                .peek(book -> System.out.println("--- Зайшло у стрім: " + book.title() +" "+ book.year() + " ---"))
                 .filter(book -> book.year() > 2015)
+                .peek(book -> System.out.println("--- Після 2015: " + book.title() +" "+ book.year() + " ---"))
                 .map(book -> book.title().toUpperCase())
+                .peek(title -> System.out.println("--- Заголовок великим буквами: " + title + " ---"))
                 .sorted()
+                .peek(title -> System.out.println("--- Відсортовано: " + title + " ---"))
                 .limit(3)
+                .peek(title -> System.out.println("--- Не більше 3: " + title + " ---"))
                 .toList();
 
-        System.out.println(result);
+        System.out.println("--- Результат ---" + "\n" + result);
     }
 }

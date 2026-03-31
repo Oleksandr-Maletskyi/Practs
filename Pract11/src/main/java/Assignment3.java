@@ -16,6 +16,7 @@ public class Assignment3 {
         );
 
         Map<String, Integer> revenueByProduct = sales.stream()
+                .peek(sale -> System.out.println("Зайшло у стрім:" + sale.product() + ", " + sale.cents()))
                 .collect(Collectors.toMap(
                         Sale::product,
                         Sale::cents,
@@ -28,6 +29,7 @@ public class Assignment3 {
 
 
         Map<String, Long> transactionsPerCustomer = sales.stream()
+                .peek(sale -> System.out.println("Зайшло у стрім:" + sale.customerEmail()))
                 .collect(Collectors.groupingBy(
                         Sale::customerEmail,
                         Collectors.counting()
@@ -35,9 +37,10 @@ public class Assignment3 {
 
         System.out.println("\n--- Кількість транзакцій за клієнтами ---");
         System.out.println(transactionsPerCustomer);
-        System.out.println("\n--- Крок 3: toMap з TreeMap ---");
+        System.out.println("\n--- toMap з TreeMap ---");
 
         Map<String, Integer> sortedRevenueByProduct = sales.stream()
+                .peek(sale -> System.out.println("Зайшло у стрім:" + sale.product() + ", " + sale.cents()))
                 .collect(Collectors.toMap(
                         Sale::product,
                         Sale::cents,

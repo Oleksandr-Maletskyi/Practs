@@ -15,20 +15,26 @@ public class Assignment4 {
 
         System.out.println("--- Підрахунок успіхів та помилок ---");
 
-        long successCount = results.stream().filter(r -> r instanceof Success).count();
-        long failureCount = results.stream().filter(r -> r instanceof Failure).count();
+        Map<Boolean, Long> counts = results.stream()
+                .peek(r -> System.out.println("Аналізуємо елемент: " + r.getClass().getSimpleName()))
+                .collect(Collectors.partitioningBy(
+                        r -> r instanceof Success,
+                        Collectors.counting()
+                ));
 
-        System.out.println("Кількість Success: " + successCount);
-        System.out.println("Кількість Failure: " + failureCount);
+        System.out.println("Кількість Success: " + counts.get(true));
+        System.out.println("Кількість Failure: " + counts.get(false));
 
         System.out.println("\n--- Повідомлення з Failure ---");
 
         List<String> failureMessages = results.stream()
+                .peek(r -> System.out.println("Зайшло у стрім: " + r.getClass().getSimpleName()))
                 .filter(r -> r instanceof Failure)
-                .map(r -> (Failure) r)
-                .map(Failure::message)
+                .peek(r -> System.out.println("Пройшло фільтр!"))
+                .map(r -> ((Failure) r).message())
+                .peek(msg -> System.out.println(" Витягнуто текст: " + msg + "\n"))
                 .toList();
 
-        System.out.println(failureMessages);
+        System.out.println("Фінальний список повідомлень: " + failureMessages);
     }
 }

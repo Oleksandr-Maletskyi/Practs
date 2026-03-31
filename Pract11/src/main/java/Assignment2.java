@@ -14,26 +14,29 @@ public class Assignment2 {
         );
 
         System.out.println("--- Унікальні відсортовані теги ---");
-
         List<String> uniqueSortedTags = books.stream()
                 .flatMap(book -> book.tags().stream())
+                .peek(tag -> System.out.println("--- Теги: " + tag + " ---"))
                 .distinct()
+                .peek(tag -> System.out.println("--- Теги без повторень: " + tag + " ---"))
                 .sorted()
+                .peek(tag -> System.out.println("--- Теги відсортовані: " + tag + " ---"))
                 .toList();
 
-        System.out.println(uniqueSortedTags);
+        System.out.println("--- Унікальні відсортовані теги результат ---" + "\n" + uniqueSortedTags);
 
 
         System.out.println("\n--- Аналітика тегів ---");
 
         Map<String, Long> tagFrequency = books.stream()
                 .flatMap(book -> book.tags().stream())
+                .peek(tag -> System.out.println("--- Теги: " + tag + " ---"))
                 .collect(Collectors.groupingBy(
                         Function.identity(),
                         Collectors.counting()
                 ));
 
-        System.out.println(tagFrequency);
+        System.out.println("--- Аналітика тегів результат ---" + "\n" + tagFrequency);
 
 
         System.out.println("\n--- Топ-N тегів ---");
@@ -41,7 +44,8 @@ public class Assignment2 {
         tagFrequency.entrySet().stream()
                 .sorted(Map.Entry.<String, Long>comparingByValue().reversed()
                         .thenComparing(Map.Entry.comparingByKey()))
-                .forEach(entry -> System.out.println(entry.getKey() + ": " + entry.getValue()));
+                .peek(tag -> System.out.println("--- Теги: " + tag + " ---"))
+                .forEach(entry -> System.out.println("Результат: " + entry.getKey() + ": " + entry.getValue()));
 
 
         System.out.println("--- partitioningBy ---");
