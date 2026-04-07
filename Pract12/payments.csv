@@ -1,0 +1,7 @@
+id,email,status,amountCents
+1,user1@mail.com,NEW,1500
+2,user2@mail.com,PAID,2000
+3,bad-email,UNKNOWN_STATUS,500
+4,user4@mail.com,FAILED,1000
+5,user5@mail.com,PAID,500
+6,user6@mail.com,NEW,3000
