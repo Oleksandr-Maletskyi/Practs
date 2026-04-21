@@ -15,13 +15,13 @@ public class Main {
         try {
             byte[] initialData = new byte[N];
             Files.write(statusFile, initialData);
-            System.out.println("1. Файл створено: " + N + " байтів (усі дорівнюють 0).");
+            System.out.println("Файл створено: " + N + " байтів (усі дорівнюють 0).");
 
             StatusFile.updateStatus(statusFile, targetIndex, newStatus);
-            System.out.println("2. Записано значення " + newStatus + " за індексом " + targetIndex + ".");
+            System.out.println("Записано значення " + newStatus + " за індексом " + targetIndex + ".");
 
             byte readBackStatus = StatusFile.readStatus(statusFile, targetIndex);
-            System.out.println("3. Прочитане значення: " + readBackStatus);
+            System.out.println("Прочитане значення: " + readBackStatus);
 
             if (readBackStatus == newStatus) {
                 System.out.println("Перевірка успішна! Байт у файлі оновлено коректно.");

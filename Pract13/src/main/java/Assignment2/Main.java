@@ -6,12 +6,10 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         System.out.println("=== Одиничний тест: Unsafe vs Safe ===");
 
-        // Тестуємо Unsafe
         Inventory unsafe = new UnsafeInventory(100);
         runReservationTask(unsafe);
         System.out.println("Залишок UnsafeInventory: " + unsafe.available());
 
-        // Тестуємо Safe
         Inventory safe = new SynchronizedInventory(100);
         runReservationTask(safe);
         System.out.println("Залишок SynchronizedInventory: " + safe.available());
@@ -38,7 +36,6 @@ public class Main {
             Inventory unsafe = new UnsafeInventory(100);
             runReservationTask(unsafe);
 
-            // Перевіряємо інваріант: доступних товарів не може бути менше нуля
             if (unsafe.available() < 0) {
                 violationsCount++;
             }

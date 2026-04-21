@@ -1,36 +1,43 @@
-package Rep;
+package Domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 
-public class Faculty {
+public class Faculty implements Serializable {
     private long id;
     private String longName;
     private String shortName;
     private Teacher decan;
     private String email;
-    private int phoneNumber;
-    @ToString.Exclude
+    private int number;
     private List<Department> departments = new ArrayList<>();
 
-    public Faculty(long id, String longName, String shortName, Teacher decan, String email, int phoneNumber) {
+    public Faculty(long id, String longName, String shortName, String email, int number) {
         this.id = id;
         this.longName = longName;
         this.shortName = shortName;
-        this.decan = decan;
         this.email = email;
-        this.phoneNumber = phoneNumber;
+        this.number = number;
     }
 
-    public void addDepartment(Department department){
-        departments.add(department);
+
+    @Override
+    public String toString() {
+        return "Faculty{" +
+                "id=" + id +
+                ", longName='" + longName + '\'' +
+                ", shortName='" + shortName + '\'' +
+                ", decan=" + decan +
+                ", email='" + email + '\'' +
+                ", phoneNumber=" + number +
+                '}';
     }
 }

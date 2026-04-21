@@ -1,4 +1,4 @@
-package Rep;
+package Domain;
 
 public enum Form {
     BUDGET,
